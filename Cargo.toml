@@ -1,0 +1,48 @@
+[package]
+name = "browser-cli"
+version = "0.1.0"
+edition = "2021"
+description = "Chrome browser automation CLI using DevTools Protocol"
+license = "MIT"
+authors = ["Mark Kockerbeck <xeb@hey.com>"]
+repository = "https://github.com/xeb/browser-cli"
+readme = "README.md"
+keywords = ["browser", "chrome", "automation", "devtools", "cli"]
+categories = ["command-line-utilities", "development-tools"]
+
+[[bin]]
+name = "browser"
+path = "src/main.rs"
+
+[dependencies]
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# HTTP client (for Chrome DevTools HTTP API)
+reqwest = { version = "0.12", features = ["json", "blocking"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Error handling
+anyhow = "1"
+
+# Base64 for WebSocket key and screenshots
+base64 = "0.22"
+
+# Random for WebSocket masking
+rand = "0.8"
+
+# SQLite for credentials and sessions
+rusqlite = { version = "0.32", features = ["bundled"] }
+
+# Home directory
+dirs = "5"
+
+# TTY detection
+atty = "0.2"
+
+[profile.release]
+lto = true
+strip = true
